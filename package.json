@@ -1,0 +1,28 @@
+{
+  "name": "adventofcode",
+  "version": "1.0.0",
+  "description": "adventofcode repo",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dominiksipowicz/adventofcode.git"
+  },
+  "keywords": [
+    "advent",
+    "code",
+    "aoc",
+    "2021",
+    "javascript",
+    "challenge"
+  ],
+  "author": "Dominik Sipowicz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dominiksipowicz/adventofcode/issues"
+  },
+  "homepage": "https://github.com/dominiksipowicz/adventofcode#readme"
+}
