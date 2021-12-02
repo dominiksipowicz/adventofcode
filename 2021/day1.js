@@ -2016,16 +2016,16 @@ const caluclateIncrease = (arr) => {
 };
 
 const calculateThreeMeasures = (arr) => {
-  let increase = 0;
+  const newArr = [];
   for (let i = 0; i < arr.length - 2; i++) {
     const current = arr[i];
     const next = arr[i + 1];
     const nextNext = arr[i + 2];
-    if (next > current && nextNext > next) {
-      increase++;
+    if (nextNext > 0) {
+      newArr.push(current + next + nextNext);
     }
   }
-  return increase;
+  return caluclateIncrease(newArr);
 };
 
 console.log(calculateThreeMeasures(arr));
