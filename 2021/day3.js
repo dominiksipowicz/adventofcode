@@ -46,18 +46,79 @@ const task1 = (arr) => {
 
   // cast from string bits to dec int
   const decGammaRate = parseInt(gammaRate, 2);
-  console.log(gammaRate);
-  console.log(decGammaRate);
   const epsilonRate = gammaRate
     .split("")
     .map((char) => parseInt(char))
     .map((item) => reverseBit(item))
     .join("");
   const decEpsilonRate = parseInt(epsilonRate, 2);
-  console.log(epsilonRate);
-  console.log(decEpsilonRate);
 
   return decGammaRate * decEpsilonRate; // decimal
 };
 
-console.log(task1(arr));
+const task2 = (arr) => {
+  const checkMostCommonBit = (arr, position) => {
+    const bitCount = {
+      zero: 0,
+      one: 0,
+    };
+    for (let i = 0; i < arr.length; i++) {
+      if (arr[i][position] === 0) {
+        bitCount.zero += 1;
+      } else {
+        bitCount.one += 1;
+      }
+    }
+    return bitCount;
+  };
+
+  // how long to run the loop
+  const numberOBits = arr[0].length;
+
+  // === oxygen generator rating part
+
+  // If 0 and 1 are equally common, keep values with a 1 in the position being considered
+  const oxygenGeneratorRatingBitCondition = (bitCount) => {
+    return bitCount.one >= bitCount.zero ? 1 : 0;
+  };
+
+  let newArr = arr; // working copy of the array
+  for (let i = 0; i < numberOBits; i++) {
+    const bitCount = checkMostCommonBit(newArr, i);
+    // remove all rows that don't have the most common bit
+    newArr = newArr.filter(
+      (row) => row[i] === oxygenGeneratorRatingBitCondition(bitCount)
+    );
+  }
+  const oxygenGeneratorRating = newArr.flat().join(""); // formatting
+  const decOxygenGeneratorRating = parseInt(oxygenGeneratorRating, 2);
+
+  // === CO2 scrubber rating
+
+  // To find CO2 scrubber rating, determine the least common value
+  // If 0 and 1 are equally common, keep values with a 0 in the position being considered.
+  const CO2scrubberRatingBitCondition = (bitCount) => {
+    return bitCount.one >= bitCount.zero ? 0 : 1;
+  };
+
+  newArr = arr; // reset working copy of the array
+  for (let i = 0; i < numberOBits; i++) {
+    const bitCount = checkMostCommonBit(newArr, i);
+    // remove all rows that don't have the most common bit
+    newArr = newArr.filter(
+      (row) => row[i] === CO2scrubberRatingBitCondition(bitCount)
+    );
+    if (newArr.length === 1) {
+      break;
+    }
+  }
+
+  const CO2scrubberRating = newArr.flat().join(""); // formatting
+  const decCO2scrubberRating = parseInt(CO2scrubberRating, 2);
+
+  // final result
+  return decOxygenGeneratorRating * decCO2scrubberRating;
+};
+
+// console.log(task1(arr));
+console.log(task2(arr));
