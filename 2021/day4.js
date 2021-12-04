@@ -78,20 +78,19 @@ const task1 = (input) => {
   // for each drawed number check for bingo on each board
   const winners = [];
   data.numbers.forEach((number) => {
-    if (winners.length && winners[0].win) {
-      // break if we already have a winner
-      return;
-    }
     data.boards.forEach((_, index) => {
       const bingoStatus = markBoard(index, number);
-      if (bingoStatus.win === true) {
+      if (
+        bingoStatus.win === true &&
+        winners.filter((x) => x.boardIndex === index).length === 0 // don't count winner again
+      ) {
         winners.push(bingoStatus);
       }
     });
   });
 
   console.log(winners);
-  const winner = winners[0];
+  const winner = winners.pop(); // last for task 2
   return parseInt(winner.number) * winner.sum;
 };
 
