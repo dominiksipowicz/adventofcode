@@ -1,14 +1,14 @@
 import run from "aocrunner";
 
-const parseInput = (rawInput: string) => rawInput;
+const parseInput = (rawInput) => rawInput;
 
-const part1 = (rawInput: string) => {
+const part1 = (rawInput) => {
   const input = parseInput(rawInput);
 
   return;
 };
 
-const part2 = (rawInput: string) => {
+const part2 = (rawInput) => {
   const input = parseInput(rawInput);
 
   return;

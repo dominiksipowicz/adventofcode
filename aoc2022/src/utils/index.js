@@ -1,7 +1,7 @@
 /**
  * Root for your util libraries.
  *
- * You can import them in the src/template/index.ts,
+ * You can import them in the src/template/index.js,
  * or in the specific file.
  *
  * Note that this repo uses ES Modules, so you have to explicitly specify
@@ -12,20 +12,13 @@
  *
  *   correct:
  *
- *     import _ from 'lodash'
+ *     import _ fro 'lodash
  *     import myLib from '../utils/myLib.js'
  *     import { myUtil } from '../utils/index.js'
  *
  *   incorrect:
  *
- *     import _ from 'lodash'
- *     import myLib from '../utils/myLib.ts'
- *     import { myUtil } from '../utils/index.ts'
- *
- *   also incorrect:
- *
- *     import _ from 'lodash'
+ *     import _ fro 'lodash
  *     import myLib from '../utils/myLib'
  *     import { myUtil } from '../utils'
- *
  */
