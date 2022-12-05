@@ -91,7 +91,31 @@ const part1 = (rawInput) => {
 const part2 = (rawInput) => {
   const input = parseInput(rawInput);
 
-  return;
+  const stacks = input.stacks;
+  input.instructions.forEach((instruction) => {
+    // parse the instruciton line using format "move Z from X to Y"
+    const [_, count, from, to] = instruction.match(
+      /move (\w+) from (\w) to (\w)/,
+    );
+
+    // flex all the stack because it's a MIGHTYYY CrateMover 9001
+    const tempCrates = [];
+
+    for (let i = 0; i < count; i++) {
+      // remove the crate from the stack
+      const crate = stacks[from].pop();
+      // push the crate to the stack
+      tempCrates.push(crate);
+    }
+    stacks[to].push(...tempCrates.reverse());
+  });
+
+  // return last crates from all stacks
+  const result = Object.values(stacks)
+    .map((stack) => stack.pop())
+    .join("");
+
+  return result;
 };
 
 run({
@@ -115,10 +139,19 @@ move 1 from 1 to 2`,
   },
   part2: {
     tests: [
-      // {
-      //   input: ``,
-      //   expected: "",
-      // },
+      {
+        input: `
+    [D]    
+[N] [C]    
+[Z] [M] [P]
+ 1   2   3 
+
+move 1 from 2 to 1
+move 3 from 1 to 3
+move 2 from 2 to 1
+move 1 from 1 to 2`,
+        expected: "MCD",
+      },
     ],
     solution: part2,
   },
