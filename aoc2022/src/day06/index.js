@@ -23,6 +23,21 @@ const part1 = (rawInput) => {
 const part2 = (rawInput) => {
   const input = parseInput(rawInput);
 
+  const length = input.length;
+
+  const distinctChars = 14;
+
+  for (let i = distinctChars; i < length; i++) {
+    // create substring from i - [distinctChars] to i
+    const subString = input.substring(i - distinctChars, i);
+
+    // remove duplicates
+    const set = new Set(subString.split(""));
+    if (set.size == distinctChars) {
+      return i;
+    }
+  }
+
   return;
 };
 
@@ -54,10 +69,26 @@ run({
   },
   part2: {
     tests: [
-      // {
-      //   input: ``,
-      //   expected: "",
-      // },
+      {
+        input: `mjqjpqmgbljsphdztnvjfqwrcgsmlb`,
+        expected: 19,
+      },
+      {
+        input: `bvwbjplbgvbhsrlpgdmjqwftvncz`,
+        expected: 23,
+      },
+      {
+        input: `nppdvjthqldpwncqszvftbrmjlhg`,
+        expected: 23,
+      },
+      {
+        input: `nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg`,
+        expected: 29,
+      },
+      {
+        input: `zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw`,
+        expected: 26,
+      },
     ],
     solution: part2,
   },
