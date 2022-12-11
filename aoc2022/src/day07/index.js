@@ -114,7 +114,38 @@ const part1 = (rawInput) => {
 const part2 = (rawInput) => {
   const input = parseInput(rawInput);
 
-  return;
+  const totalDiskSpace = 70_000_000;
+  const updateRunSpace = 30_000_000;
+
+  const dirSizes = [];
+
+  const traverse = (root) => {
+    if (root.type === "file") {
+      return root.size;
+    }
+
+    Object.keys(root.items).forEach((key) => {
+      root.size += traverse(root.items[key]);
+    });
+
+    dirSizes.push(root.size);
+
+    return root.size;
+  };
+
+  traverse(input);
+
+  // last dir size is the root dir and the sum of all dir sizes
+  const sum = dirSizes[dirSizes.length - 1];
+
+  const sortedDirSizes = dirSizes.sort((a, b) => b - a).reverse();
+  const freeSpace = totalDiskSpace - sum;
+  const needSpace = updateRunSpace - freeSpace;
+
+  // console.log(sortedDirSizes, sum, freeSpace, needSpace);
+
+  // return the first dir size that is bigger than the needed space
+  return sortedDirSizes.find((size) => size >= needSpace);
 };
 
 run({
@@ -152,10 +183,33 @@ $ ls
   },
   part2: {
     tests: [
-      // {
-      //   input: ``,
-      //   expected: "",
-      // },
+      {
+        input: `
+$ cd /
+$ ls
+dir a
+14848514 b.txt
+8504156 c.dat
+dir d
+$ cd a
+$ ls
+dir e
+29116 f
+2557 g
+62596 h.lst
+$ cd e
+$ ls
+584 i
+$ cd ..
+$ cd ..
+$ cd d
+$ ls
+4060174 j
+8033020 d.log
+5626152 d.ext
+7214296 k`,
+        expected: 24933642,
+      },
     ],
     solution: part2,
   },
