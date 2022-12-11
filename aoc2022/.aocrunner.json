@@ -106,9 +106,9 @@
     {
       "part1": {
         "solved": false,
-        "result": null,
+        "result": "1870",
         "attempts": [],
-        "time": null
+        "time": 6.049125
       },
       "part2": {
         "solved": false,
